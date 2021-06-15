@@ -2,7 +2,7 @@ import React from "react";
 
 function Feed (){
   return (
-    <h1>tela de login</h1>
+    <h1>tela de feed</h1>
   )
 
 }
