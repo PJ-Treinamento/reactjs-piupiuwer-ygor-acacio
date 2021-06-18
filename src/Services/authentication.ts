@@ -15,27 +15,29 @@ declare interface User {
   photo: string;
   //pius: Piu[];
   //likes: PiuLike[];
-  following: User[];
-  followers: User[];
+  //following: User[];
+  //followers: User[];
   //favorites: Piu[]; 
 }
 
 type Token = string
+
 export const SingIn = async (credentials: Credentials ) =>{
  try {
    const response =  await Api.post('/sessions/login/', credentials)
    const data = response.data
    const { token, user } = data 
-  storeToken(token) 
+  //storeToken(token) 
+  localStorage.setItem("@piupiuwer:token", token)
   localStorage.setItem('@piupiuwer:user', user)
  } catch (error) {
    console.log(error)
  }
 }
 
-export const storeToken = (token: Token) => {
-  window.localStorage.setItem('token', token)
-}
+//export const storeToken = (token: Token) => {
+ // window.localStorage.setItem('token', token)
+//}
 
 export const getToken = () => {
   return window.localStorage.getItem('token')

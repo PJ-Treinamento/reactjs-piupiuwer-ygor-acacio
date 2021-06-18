@@ -1,8 +1,9 @@
 import React from "react";
+import * as S from "./styles" 
 
 function Feed (){
   return (
-    <h1>tela de feed</h1>
+    <S.H1>tela de feed</S.H1>
   )
 
 }

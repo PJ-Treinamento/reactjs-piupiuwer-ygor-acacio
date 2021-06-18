@@ -1,31 +1,19 @@
 import React, {FormEvent} from "react";
 
-import "./style.css";
 import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
 import Copyright from "../../Assets/Images/copyright.svg"
 import { useState }from "react";
 import { SingIn } from "../../Services/authentication";
-import Api from "../../Services/api";
 
-
+import * as S from "./styles"
 
  function Login (){
   const [credentials, setCredentials] = useState({ email:'', password:'' })
   
   const hendleFormSubmit = async (e:FormEvent) => {
     e.preventDefault()
-    console.log(credentials)
     await SingIn(credentials)
   }
-   /*const hendleFormSubmit = async () =>{ 
-   try {
-      const user = await SingIn(credentials)
-      Api.defaults.headers.authorization = `Bearer${user.token}`
-      //storeToken(user.token)
-    } catch (err) {
-      alert('erro')
-    }*/
-
 
   const HandleInputChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
     const { name, value } = event.target
@@ -36,47 +24,45 @@ import Api from "../../Services/api";
   }
 
   return (
-    <div className="loginScreem">
-      <nav className="navBar" > 
-        <img className="logoPiupiuwer" src={LogoPiupiuwer} alt="piupiuwer" />
-      </nav>
+    <S.LoginScreen>
+      <S.NavBar> 
+        <S.LogoPiuPiuwer src={LogoPiupiuwer} alt="piupiuwer" />
+      </S.NavBar>
 
       <form onSubmit={hendleFormSubmit}>
-        <section>
-          <div className="loginBox">
-            <h1> Faça seu login </h1>
+        <S.Section>
+          <S.LoginBox>
+            <S.Tittle> Faça seu login </S.Tittle>
             <label htmlFor="email"></label>
-            <input 
-              className="inputLogin" 
-              id="email"
-              placeholder="Email:" 
-              name ="email"
-              type="text" 
-              value={credentials.email}
-              onChange={HandleInputChange} 
-            />
+              <S.LoginInput 
+                widthInput={false}
+                placeholder="Email:" 
+                name ="email"
+                type="text" 
+                value={credentials.email}
+                onChange={HandleInputChange} 
+              />
             <label htmlFor="password"></label>
-            <input 
-              className="inputLogin" 
-              id="password" 
-              placeholder="Senha:" 
-              name ="password"
-              type="text" 
-              value={credentials.password}
-              onChange={HandleInputChange}
-            />
-            <button type="submit">Entrar</button>
-            <p>Esqueci minha senha</p>
-            <p>Não tenho cadastro</p>
-          </div>
-        </section>
+              <S.LoginInput           
+                widthInput={true}
+                placeholder="Senha:" 
+                name ="password"
+                type="text" 
+                value={credentials.password}
+                onChange={HandleInputChange}
+              />
+            <S.Button type="submit">Entrar</S.Button >
+            <S.P colorFooter={false} cursorFooter >Esqueci minha senha</S.P>
+            <S.P colorFooter={false} cursorFooter >Não tenho cadastro</S.P>
+          </S.LoginBox>
+        </S.Section>
       </form>
 
-      <footer className="footer">
-        <img id="copyright"src={Copyright} alt="copyright" />
-        <p id="footer" >Copyright of Polijunior</p>
-      </footer>
-    </div>
+      <S.Footer>
+        <S.Copyright src={Copyright} alt="copyright" />
+        <S.P  colorFooter={true} marginFooter sizeFooter >Copyright of Polijunior</S.P>
+      </S.Footer>
+    </S.LoginScreen>
   );
 
 }
