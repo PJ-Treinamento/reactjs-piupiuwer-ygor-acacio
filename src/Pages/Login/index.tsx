@@ -1,5 +1,5 @@
 import React, {FormEvent} from "react";
-
+import {Link} from "react-router-dom";
 import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
 import Copyright from "../../Assets/Images/copyright.svg"
 import { useState }from "react";
@@ -51,7 +51,10 @@ import * as S from "./styles"
                 value={credentials.password}
                 onChange={HandleInputChange}
               />
-            <S.Button type="submit">Entrar</S.Button >
+            <Link to="/feed">
+              <S.Button type="submit">Entrar</S.Button >
+            </Link>
+            
             <S.P colorFooter={false} cursorFooter >Esqueci minha senha</S.P>
             <S.P colorFooter={false} cursorFooter >Não tenho cadastro</S.P>
           </S.LoginBox>

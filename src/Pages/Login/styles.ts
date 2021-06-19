@@ -48,9 +48,7 @@ export const LoginBox = styled.div`
   border-radius: 0.8rem;
   min-width: 47rem;
   height: 50rem;
-  box-shadow: 0.1rem 0.4rem rgb(159, 154, 154);
-
-  
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   @media (min-width: 1100px){
     min-width: 49rem;
