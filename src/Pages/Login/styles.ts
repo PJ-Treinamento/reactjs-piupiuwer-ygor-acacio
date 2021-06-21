@@ -116,6 +116,7 @@ export const P = styled.p<pProps>`
   color: ${ props => props.colorFooter ? 'black' : 'rgba(128, 126, 126, 1)' };
   margin-left: ${ props => props.marginFooter ? '1rem': ''};
   cursor: ${ props => props.cursorFooter ? 'pointer' : ''};
+  text-decoration:none;
 
   @media (min-width: 1100px){
     font-size: 1.6rem;
