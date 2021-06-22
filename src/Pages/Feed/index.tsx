@@ -7,8 +7,10 @@ import IconExit from "../../Assets/Images/sair.svg";
 import Piu from "../../Assets/Components/Pius/pius";
 import { Context } from "../../Assets/Hooks/authContext";
 import Api from "../../Services/api";
-//import Magnifying from "../../Assets/Images/Magnifying.svg";
+import IconMagnifying from "../../Assets/Images/Magnifying.svg";
 import * as S from "./styles" 
+import { FormEvent } from "react";
+import { IPiu } from "../../Assets/Components/Interfaces/interfaces";
 
 
 function Feed (){
@@ -16,27 +18,41 @@ function Feed (){
   const {authenticated} = useContext(Context)
   const {user, token} = authenticated
 
-  const [piu, setPiu] = useState('')
+  const [postPius, setPostPius] = useState('')
+  const [pius, setPius] = useState<IPiu[]>([])
+  
 
   useEffect(() =>{
     const Data = async() =>{
-      const response = await Api.get('/pius', {
+      try {
+        const response = await Api.get('/pius', {
         headers: {authorization:`Bearer ${token}`}
-      
+        
       })
+      setPius(response.data)
+      // console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
     }
     Data()
-  }, []) 
+  }, [token]) 
 
-  const PostPiu = () => {
-    Api.post('', { text:"" },  )
+  const PostPiu = (e:FormEvent) => {
+    e.preventDefault()
+    Api.post('/pius', { text:postPius }, {
+      headers: {authorization:`Bearer ${token}`}
+    } )
   }
 
   return (
     <div>
       <S.NavBarCenter>
         <S.NavBar>
-          <S.SearchInput type="text" placeholder='Pesquisar' />
+          <S.Search>
+            <S.SearchInput type="text" placeholder='Pesquisar' />
+            <S.Icons src={IconMagnifying} alt="Magnifying Icon" />
+          </S.Search>
           <S.LogoPiuPiuwer src={LogoPiuPiuwer} alt="logo do piupiuwer" />
           <S.MenuBar>
             <S.IconMenu><S.Icons src={IconNotification} alt="Notification Icon" />Notifacações</S.IconMenu>
@@ -54,8 +70,8 @@ function Feed (){
               <S.Tittle>{user.first_name} {user.last_name}</S.Tittle>
               <S.Tittle2>@{user.username}</S.Tittle2>
               <S.Tittle2>{user.about}</S.Tittle2>
-              <S.Tittle2>Following: {user.following}</S.Tittle2>
-              <S.Tittle2>Followers: {user.followers}</S.Tittle2>
+              <S.Tittle2>Following {user.following.length}</S.Tittle2>
+              <S.Tittle2>Followers {user.followers.length}</S.Tittle2>
             </S.ProfileInfo>
           </S.Profile>
           <S.PiuPost>
@@ -66,8 +82,8 @@ function Feed (){
                   <S.AreaPiu 
                     name="piu" 
                     placeholder="Escreva aqui: "
-                    value={piu}
-                    onChange={(e) => {setPiu(e.target.value)}}
+                    value={postPius}
+                    onChange={(e) => {setPostPius(e.target.value)}}
                   ></S.AreaPiu>
                   <S.Button type="submit" onClick={PostPiu} >Piar ?</S.Button>
               </S.WritePiu>
@@ -76,7 +92,7 @@ function Feed (){
         </S.Header>
       </S.HeaderCenter>
       <S.Section>
-        <Piu/>
+        {pius.map(piu => <Piu {...piu} key={piu.id}/>)}
       </S.Section>
     </div>
   )

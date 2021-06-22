@@ -39,14 +39,12 @@ export const PiuBoxProfile = styled.div`
   width: 39rem;
 
   img{
-    border-radius: 100%;
-    width: 2.9rem;
     cursor: pointer;
-  }
+  } 
 
   h2{
     color: rgba(0, 0, 0, 0.9);
-    max-width: 15rem;
+    max-width: 20rem;
   }
 
   h3, p{
@@ -55,20 +53,28 @@ export const PiuBoxProfile = styled.div`
   }
 
   @media (min-width: 1100px){
-    width: 45rem;
-
-    img{
-      width: 3.2rem;
-    }
+    width: 50rem;
 
     h2{
-      max-width: 25rem;
+      max-width: 35rem;
       font-size: 1.7rem;
     }
 
     h3, p{
       font-size: 1.3rem;
     }
+  }
+`
+export const ImgProfile = styled.img`
+  border-radius: 100%;
+  width: 2.9rem;
+  height: 2.9rem;
+  cursor: pointer;
+
+  @media (min-width: 1100px){
+    width: 3rem;
+    height: 3rem;
+
   }
 `
 

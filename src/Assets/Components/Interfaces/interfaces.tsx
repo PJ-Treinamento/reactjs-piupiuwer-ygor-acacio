@@ -5,7 +5,7 @@ export interface Credentials{
   password:string
 }
 
-interface Piu{
+export interface IPiu{
   id: string;
 	user: User;
 	likes: PiuLike[];
@@ -17,7 +17,7 @@ interface Piu{
 interface PiuLike {
 	id: string;
 	user: User;
-	piu: Piu;
+	piu: IPiu;
 }
 
 interface User{
@@ -28,11 +28,11 @@ interface User{
 	email: string;
 	about: string;
 	photo: string;
-	pius: Piu[];
+	pius: IPiu[];
 	likes: PiuLike[];
 	following: User[];
 	followers: User[];
-	favorites: Piu[];
+	favorites:IPiu[];
 }
 
 export interface AuthState{

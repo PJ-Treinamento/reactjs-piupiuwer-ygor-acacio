@@ -32,6 +32,11 @@ export const NavBarCenter = styled.div`
   display: flex;
   justify-content: center;
 `
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+`
 export const SearchInput = styled.input`
   width: 11rem;
   border-radius: 0.8rem;
