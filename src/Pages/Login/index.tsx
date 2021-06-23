@@ -1,13 +1,13 @@
-import React, {FormEvent} from "react";
-import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
-import Copyright from "../../Assets/Images/copyright.svg"
-import { useState, useContext }from "react";
+import React, {FormEvent, useState, useContext} from "react";
 import { Context } from "../../Assets/Hooks/authContext";
 import { Link } from "react-router-dom";
+import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
+import Copyright from "../../Assets/Images/copyright.svg"
 
 import * as S from "./styles"
 
 const Login = () => {
+  
   const {SingIn} = useContext(Context)
   const [credentials, setCredentials] = useState({ email:'', password:'' })
   

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, FormEvent } from "react";
+import Api from "../../Services/api";
+import { IPiu } from "../../Assets/Components/Interfaces/interfaces";
 import  LogoPiuPiuwer  from "../../Assets/Images/logo-PP.svg";
 import IconNotification from "../../Assets/Images/sino.svg";
 import IconProfile from "../../Assets/Images/profile.svg";
@@ -6,12 +8,9 @@ import IconConfig from "../../Assets/Images/gear.svg";
 import IconExit from "../../Assets/Images/sair.svg";
 import Piu from "../../Assets/Components/Pius";
 import { Context } from "../../Assets/Hooks/authContext";
-import Api from "../../Services/api";
 import IconMagnifying from "../../Assets/Images/Magnifying.svg";
-import * as S from "./styles" 
-import { FormEvent } from "react";
-import { IPiu } from "../../Assets/Components/Interfaces/interfaces";
 
+import * as S from "./styles" 
 
 const Feed = () => {
   const {Logout} = useContext(Context)
@@ -20,7 +19,6 @@ const Feed = () => {
 
   const [postPius, setPostPius] = useState('')
   const [pius, setPius] = useState<IPiu[]>([])
-  
 
   useEffect(() =>{
     const Data = async() =>{
@@ -35,7 +33,7 @@ const Feed = () => {
     }
     Data()
   }, [token]) 
-  
+  //validando o tamanho do piu que será feito
   const PostPiu = (e:FormEvent) => {
     if (postPius.length===0 || postPius.length>=140){
       e.preventDefault()
@@ -51,8 +49,14 @@ const Feed = () => {
       <S.NavBarCenter>
         <S.NavBar>
           <S.Search>
-            <S.SearchInput type="text" placeholder='Pesquisar' />
-            <S.Icons src={IconMagnifying} alt="Magnifying Icon" />
+            <S.SearchInput 
+              type="text" 
+              placeholder='Pesquisar'  
+            />
+            <S.Icons 
+              src={IconMagnifying} 
+              alt="Magnifying Icon" 
+            />
           </S.Search>
           <S.LogoPiuPiuwer src={LogoPiuPiuwer} alt="logo do piupiuwer" />
           <S.MenuBar>
@@ -63,6 +67,7 @@ const Feed = () => {
           </S.MenuBar>
         </S.NavBar>
       </S.NavBarCenter>
+
       <S.HeaderCenter>
         <S.Header>
           <S.Profile>
@@ -79,19 +84,20 @@ const Feed = () => {
             <S.Tittle>Que tal escrever um piu agora ?</S.Tittle>
             <form>
               <S.WritePiu>
-                  <label htmlFor="piu"></label>
-                  <S.AreaPiu 
-                    name="piu" 
-                    placeholder="Escreva aqui:"
-                    value={postPius}
-                    onChange={(e) => {setPostPius(e.target.value)}}
-                  ></S.AreaPiu>
-                  <S.Button type="submit" onClick={PostPiu} >Piar ?</S.Button>
+                <label htmlFor="piu"></label>
+                <S.AreaPiu 
+                  name="piu" 
+                  placeholder="Escreva aqui:"
+                  value={postPius}
+                  onChange={(e) => {setPostPius(e.target.value)}}
+                ></S.AreaPiu>
+                <S.Button type="submit" onClick={PostPiu} >Piar ?</S.Button>
               </S.WritePiu>
             </form>
           </S.PiuPost>
         </S.Header>
       </S.HeaderCenter>
+
       <S.Section>
         {pius.map(piu => <Piu {...piu} key={piu.id}/>)}
       </S.Section>

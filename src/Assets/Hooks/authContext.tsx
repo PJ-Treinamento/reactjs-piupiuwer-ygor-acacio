@@ -1,5 +1,4 @@
-import React, { useContext } from "react"
-import { createContext, useState } from "react"
+import React, { useContext, createContext, useState  } from "react"
 import Api from "../../Services/api";
 import { ICredentials, IAuthState, IAuthContextData }from "../Components/Interfaces/interfaces"
 
@@ -8,7 +7,8 @@ export const Context = createContext<IAuthContextData>({} as IAuthContextData);
 export const AuthProvider: React.FC <any> = ({children}) => {
 
   const [authenticated, setAuthenticated] = useState<IAuthState>(() => {
-      const token = localStorage.getItem('@piupiuwer:token');
+    // Verificando se ja existe um usuario logado no navegador
+      const token = localStorage.getItem('@piupiuwer:token')
       const user = localStorage.getItem('@piupiuwer:user')
 
       if(user && token) {
@@ -17,7 +17,7 @@ export const AuthProvider: React.FC <any> = ({children}) => {
 
       return {} as IAuthState;
   });
-
+  //Função para entrada do usuario e amazenamento de seu token no local storage
   const SingIn = async ({email, password}: ICredentials ) =>{
     const response =  await Api.post('/sessions/login/', {
       email,
@@ -31,7 +31,7 @@ export const AuthProvider: React.FC <any> = ({children}) => {
 
     setAuthenticated({ token, user}); 
     }
-
+    //Saida do usuario removendo seu token do local storage
     const Logout = () => {
       localStorage.removeItem('@piupiuwer:user');
       localStorage.removeItem('@piupiuwer:token');

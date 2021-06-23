@@ -1,23 +1,25 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { Context } from "../../Hooks/authContext";
+import Api from "../../../Services/api";
 import EmptyStar from "../../Images/empty-star.svg"
 import GoldenStar from "../../Images/golden-star.svg"
 import EmptyHeart from "../../Images/empty-heart.svg";
 import FullHeart from "../../Images/full-heart.svg"
 import Baloon from "../../Images/baloon.svg";
 import DeleteIcon from "../../Images/trash.svg";
-import * as S from "./styles"
 import { IPiu } from "../Interfaces/interfaces";
-import { useContext } from "react";
-import { Context } from "../../Hooks/authContext";
-import Api from "../../../Services/api";
+
+import * as S from "./styles"
 
 const Piu = ({user, text, likes, id, updated_at}:IPiu) => {
+  //Criando o estado para variar o icon de like e de favorito, enquanto acessa a Api
   const [like, setLike] = useState(EmptyHeart)
   const [favorite, setFavorite] = useState(EmptyStar)
 
   const {authenticated} = useContext(Context)
   const {token} = authenticated
-
+  // Criando todas a funções de deletar, dar like e de favoritar
   const deletePiu = async() => {
     try {
       const deleteResponse = await Api.delete('/pius',

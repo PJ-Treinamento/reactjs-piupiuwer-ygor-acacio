@@ -1,11 +1,10 @@
-import React from "react";
+import React, {FormEvent, useState} from "react";
+import Api from "../../Services/api";
+import { Link } from "react-router-dom";
 import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
 import Copyright from "../../Assets/Images/copyright.svg"
+
 import * as S from "./styles"
-import { FormEvent } from "react";
-import Api from "../../Services/api";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
