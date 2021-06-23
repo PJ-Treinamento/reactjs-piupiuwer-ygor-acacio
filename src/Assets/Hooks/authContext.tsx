@@ -1,24 +1,24 @@
-import React from "react"
+import React, { useContext } from "react"
 import { createContext, useState } from "react"
 import Api from "../../Services/api";
-import { Credentials, AuthState, AuthContextData }from "../Components/Interfaces/interfaces"
+import { ICredentials, IAuthState, IAuthContextData }from "../Components/Interfaces/interfaces"
 
-export const Context = createContext<AuthContextData>({} as AuthContextData);
+export const Context = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC <any> = ({children}) => {
 
-  const [authenticated, setAuthenticated] = useState<AuthState>(() => {
-      const token = localStorage.getItem('@piupiuwer:Token');
+  const [authenticated, setAuthenticated] = useState<IAuthState>(() => {
+      const token = localStorage.getItem('@piupiuwer:token');
       const user = localStorage.getItem('@piupiuwer:user')
 
       if(user && token) {
         return{ token, user: JSON.parse(user)}
       }
 
-      return {} as AuthState;
+      return {} as IAuthState;
   });
 
-  const SingIn = async ({email, password}: Credentials ) =>{
+  const SingIn = async ({email, password}: ICredentials ) =>{
     const response =  await Api.post('/sessions/login/', {
       email,
       password,
@@ -33,15 +33,20 @@ export const AuthProvider: React.FC <any> = ({children}) => {
     }
 
     const Logout = () => {
-      localStorage.removeItem('@Project:user');
-      localStorage.removeItem('@Project:token');
+      localStorage.removeItem('@piupiuwer:user');
+      localStorage.removeItem('@piupiuwer:token');
   
-      setAuthenticated({} as AuthState);
+      setAuthenticated({} as IAuthState);
   }
 
     return (
-      <Context.Provider value={{ authenticated, SingIn, Logout}} >
+      <Context.Provider value={{ authenticated, SingIn, Logout, user:authenticated.user, token:authenticated.token }} >
         { children }
       </Context.Provider>
     )  
+}
+
+export const useAuth = () => {
+    const context = useContext(Context)
+    return(context)
 }

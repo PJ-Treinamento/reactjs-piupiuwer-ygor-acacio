@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface Credentials{
+export interface ICredentials{
   email: string
   password:string
 }
@@ -35,13 +35,15 @@ interface User{
 	favorites:IPiu[];
 }
 
-export interface AuthState{
+export interface IAuthState{
   token:string
   user:User
 }
 
-export interface AuthContextData{
-  authenticated:AuthState
-  SingIn:(cred:Credentials) => Promise<any>
+export interface IAuthContextData{
+  authenticated:IAuthState
+  SingIn:(cred:ICredentials) => Promise<any>
 	Logout:any
+	token:string
+	user:User
 }

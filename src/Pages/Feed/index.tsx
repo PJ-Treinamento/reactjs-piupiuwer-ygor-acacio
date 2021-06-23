@@ -4,7 +4,7 @@ import IconNotification from "../../Assets/Images/sino.svg";
 import IconProfile from "../../Assets/Images/profile.svg";
 import IconConfig from "../../Assets/Images/gear.svg";
 import IconExit from "../../Assets/Images/sair.svg";
-import Piu from "../../Assets/Components/Pius/pius";
+import Piu from "../../Assets/Components/Pius";
 import { Context } from "../../Assets/Hooks/authContext";
 import Api from "../../Services/api";
 import IconMagnifying from "../../Assets/Images/Magnifying.svg";
@@ -13,7 +13,7 @@ import { FormEvent } from "react";
 import { IPiu } from "../../Assets/Components/Interfaces/interfaces";
 
 
-function Feed (){
+const Feed = () => {
   const {Logout} = useContext(Context)
   const {authenticated} = useContext(Context)
   const {user, token} = authenticated
@@ -27,23 +27,24 @@ function Feed (){
       try {
         const response = await Api.get('/pius', {
         headers: {authorization:`Bearer ${token}`}
-        
       })
       setPius(response.data)
-      // console.log(response)
       } catch (error) {
         console.log(error)
       }
     }
     Data()
   }, [token]) 
-
+  
   const PostPiu = (e:FormEvent) => {
+    if (postPius.length===0 || postPius.length>=140){
+      e.preventDefault()
+    }else{
     e.preventDefault()
     Api.post('/pius', { text:postPius }, {
       headers: {authorization:`Bearer ${token}`}
     } )
-  }
+  }}
 
   return (
     <div>
@@ -81,7 +82,7 @@ function Feed (){
                   <label htmlFor="piu"></label>
                   <S.AreaPiu 
                     name="piu" 
-                    placeholder="Escreva aqui: "
+                    placeholder="Escreva aqui:"
                     value={postPius}
                     onChange={(e) => {setPostPius(e.target.value)}}
                   ></S.AreaPiu>

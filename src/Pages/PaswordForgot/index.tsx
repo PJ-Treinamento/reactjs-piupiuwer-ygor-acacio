@@ -1,9 +1,9 @@
 import React from "react";
 import { H1 } from "./styles";
 
-function PasswordForgot (){
+const PasswordForgot = () => {
  return(
-   <H1>Tente se lembrar</H1>
+   <H1>Em construção</H1>
  ) 
 }
 

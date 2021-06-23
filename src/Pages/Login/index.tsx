@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 
 import * as S from "./styles"
 
-
- function Login (){
+const Login = () => {
   const {SingIn} = useContext(Context)
   const [credentials, setCredentials] = useState({ email:'', password:'' })
   
@@ -17,7 +16,7 @@ import * as S from "./styles"
     await SingIn(credentials)
   }
 
-  const HandleInputChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
+  const HendleInputChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
     const { name, value } = event.target
     setCredentials({
       ...credentials,
@@ -42,7 +41,7 @@ import * as S from "./styles"
                 name ="email"
                 type="text" 
                 value={credentials.email}
-                onChange={HandleInputChange} 
+                onChange={HendleInputChange} 
               />
             <label htmlFor="password"></label>
               <S.LoginInput           
@@ -51,7 +50,7 @@ import * as S from "./styles"
                 name ="password"
                 type="text" 
                 value={credentials.password}
-                onChange={HandleInputChange}
+                onChange={HendleInputChange}
               />
               <S.Button type="submit">Entrar</S.Button >
             <Link to='/esquici-minha-senha'>

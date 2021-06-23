@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Route as ReactRouter, RouteProps as ReactRouteProps, Redirect} from 'react-router-dom';
-import { Context } from "../Assets/Hooks/authContext";
+import { Context, useAuth } from "../Assets/Hooks/authContext";
 
 interface RouteProps extends ReactRouteProps {
   isPrivate?: boolean;
@@ -9,8 +9,7 @@ interface RouteProps extends ReactRouteProps {
 }
 
 const Route: React.FC<RouteProps> = ({ isPrivate = false, component: Component, ...rest }) => {
-  const {authenticated} = useContext(Context)
-  const {user} = authenticated
+    const {user} = useAuth()
   return (
     <ReactRouter
         {...rest}

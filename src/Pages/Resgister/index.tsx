@@ -2,47 +2,94 @@ import React from "react";
 import LogoPiupiuwer from "../../Assets/Images/logo-PP.svg";
 import Copyright from "../../Assets/Images/copyright.svg"
 import * as S from "./styles"
+import { FormEvent } from "react";
+import Api from "../../Services/api";
 
-function Register (){
+const Register = () => {
+  // const [credentials, setCredentials] = useState({
+  //   first_name:'',
+  //   last_name:'',
+  //   email:'',
+  //   photo:'',
+  //   password:'',
+  //   username:''
+  // })
+  
+  // const hendleFormSubmit = async (e:FormEvent) => {
+  //   e.preventDefault()
+  //   await Api.post('/register', credentials,
+  //   {headers: {authorization:Node}})
+  // }
+
+  // const HendleInputChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
+  //   const { name, value } = event.target
+  //   setCredentials({
+  //     ...credentials,
+  //     [name] : value
+  //   })
+  // }
+
   return (
       <S.RegisterScreen>
         <S.NavBar> 
         <S.LogoPiuPiuwer src={LogoPiupiuwer} alt="piupiuwer" />
       </S.NavBar>
-       {/*
-      <form onSubmit={hendleFormSubmit}>
+      
+      {/* <form onSubmit={hendleFormSubmit}>
         <S.Section>
           <S.LoginBox>
             <S.Tittle> Faça seu Cadastro </S.Tittle>
-            <label htmlFor="email"></label>
-              <S.LoginInput 
-                widthInput={false}
-                placeholder="Email:" 
-                name ="email"
-                type="text" 
-                value={credentials.email}
-                onChange={HandleInputChange} 
+            <label htmlFor="first_name">
+              <S.FistNameInput
+                placeholder="Primeiro Nome:"
+                name="first_name"
+                type="text"
+                value={credentials.first_name}
+                onChange={HendleInputChange}
               />
-            <label htmlFor="password"></label>
-              <S.LoginInput           
-                widthInput={true}
-                placeholder="Senha:" 
-                name ="password"
-                type="text" 
-                value={credentials.password}
-                onChange={HandleInputChange}
+            </label>
+            <label htmlFor="first_name">
+              <S.LastNameInput
+                placeholder="Sobrenome:"
+                name="last_name"
+                type="text"
+                value={credentials.last_name}
+                onChange={HendleInputChange}
               />
+            </label>
+            <label htmlFor="">
+              <S.FistNameInput
+                placeholder="Primeiro Nome:"
+                name="first_name"
+                type="text"
+                value={credentials.first_name}
+                onChange={HendleInputChange}
+              />
+            </label>
+            <label htmlFor="first_name">
+              <S.FistNameInput
+                placeholder="Primeiro Nome:"
+                name="first_name"
+                type="text"
+                value={credentials.first_name}
+                onChange={HendleInputChange}
+              />
+            </label>
+            <label htmlFor="first_name">
+              <S.FistNameInput
+                placeholder="Primeiro Nome:"
+                name="first_name"
+                type="text"
+                value={credentials.first_name}
+                onChange={HendleInputChange}
+              />
+            </label>
+
               <S.Button type="submit">Entrar</S.Button >
-            <Link to='/esquici-minha-senha'>
-              <S.P colorFooter={false} cursorFooter >Esqueci minha senha</S.P>
-            </Link>
-            <Link to='/registrar' >
-              <S.P colorFooter={false} cursorFooter >Não tenho cadastro</S.P>
-            </Link> 
             
           </S.LoginBox>
         </S.Section>
-      </form>*/}
+      </form> */}
 
       <S.Footer>
         <S.Copyright src={Copyright} alt="copyright" />
