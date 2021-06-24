@@ -17,8 +17,12 @@ const Feed = () => {
   const {authenticated} = useContext(Context)
   const {user, token} = authenticated
 
+  const [search, setSearch] = useState('')
   const [postPius, setPostPius] = useState('')
   const [pius, setPius] = useState<IPiu[]>([])
+  //filtragen da barra de busca
+  const piusFilter = pius.filter((piu) => 
+    piu.user.first_name.toLocaleLowerCase().includes(search))
 
   useEffect(() =>{
     const Data = async() =>{
@@ -51,7 +55,9 @@ const Feed = () => {
           <S.Search>
             <S.SearchInput 
               type="text" 
-              placeholder='Pesquisar'  
+              placeholder='Pesquisar'
+              value={search}
+              onChange={(ev) => setSearch(ev.target.value) }  
             />
             <S.Icons 
               src={IconMagnifying} 
@@ -99,7 +105,7 @@ const Feed = () => {
       </S.HeaderCenter>
 
       <S.Section>
-        {pius.map(piu => <Piu {...piu} key={piu.id}/>)}
+        {piusFilter.map(piu => <Piu {...piu} key={piu.id}/>)}
       </S.Section>
     </div>
   )
