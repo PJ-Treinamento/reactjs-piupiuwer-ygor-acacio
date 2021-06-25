@@ -7,20 +7,20 @@ export interface ICredentials{
 
 export interface IPiu{
   id: string;
-	user: User;
-	likes: PiuLike[];
+	user: IUser;
+	likes: IPiuLike[];
 	text: string;
 	created_at: Date;
 	updated_at: Date;
 }
 
-interface PiuLike {
+export interface IPiuLike {
 	id: string;
-	user: User;
+	user: IUser;
 	piu: IPiu;
 }
 
-interface User{
+export interface IUser{
   id: string;
 	username: string;
 	first_name: string;
@@ -29,15 +29,15 @@ interface User{
 	about: string;
 	photo: string;
 	pius: IPiu[];
-	likes: PiuLike[];
-	following: User[];
-	followers: User[];
+	likes: IPiuLike[];
+	following: IUser[];
+	followers: IUser[];
 	favorites:IPiu[];
 }
 
 export interface IAuthState{
   token:string
-  user:User
+  user:IUser
 }
 
 export interface IAuthContextData{
@@ -45,5 +45,5 @@ export interface IAuthContextData{
   SingIn:(cred:ICredentials) => Promise<any>
 	Logout:any
 	token:string
-	user:User
+	user:IUser
 }

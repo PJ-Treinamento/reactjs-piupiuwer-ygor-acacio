@@ -69,7 +69,7 @@ const Feed = () => {
             <S.IconMenu><S.Icons src={IconNotification} alt="Notification Icon" />Notifacações</S.IconMenu>
             <S.IconMenu><S.Icons src={IconProfile} alt="Profile Icon" />Perfil</S.IconMenu>
             <S.IconMenu><S.Icons src={IconConfig} alt="gear Icon" />Configurações</S.IconMenu>
-            <S.IconMenu><S.Icons src={IconExit} alt="Exit Icon" onClick={Logout} />Sair</S.IconMenu>
+            <S.IconMenu onClick={Logout}><S.Icons src={IconExit} alt="Exit Icon"  />Sair</S.IconMenu>
           </S.MenuBar>
         </S.NavBar>
       </S.NavBarCenter>

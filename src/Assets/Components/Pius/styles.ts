@@ -36,7 +36,7 @@ export const PiuBoxProfile = styled.div`
   font-family: Roboto;
   align-items: center;
   justify-content: space-between;
-  width: 39rem;
+  width: 43rem;
 
   img{
     cursor: pointer;
@@ -53,7 +53,7 @@ export const PiuBoxProfile = styled.div`
   }
 
   @media (min-width: 1100px){
-    width: 50rem;
+    width: 54rem;
 
     h2{
       max-width: 35rem;

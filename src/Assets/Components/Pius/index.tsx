@@ -4,22 +4,25 @@ import { Context } from "../../Hooks/authContext";
 import Api from "../../../Services/api";
 import EmptyStar from "../../Images/empty-star.svg"
 import GoldenStar from "../../Images/golden-star.svg"
+import Follow from "../../Images/follow.svg"
+import Following from "../../Images/following.svg"
 import EmptyHeart from "../../Images/empty-heart.svg";
 import FullHeart from "../../Images/full-heart.svg"
 import Baloon from "../../Images/baloon.svg";
 import DeleteIcon from "../../Images/trash.svg";
-import { IPiu } from "../Interfaces/interfaces";
+import { IPiu, IUser} from "../Interfaces/interfaces";
 
 import * as S from "./styles"
 
-const Piu = ({user, text, likes, id, updated_at}:IPiu) => {
+const Piu = ({user, text, likes, id, updated_at, }:IPiu) => {
   //Criando o estado para variar o icon de like e de favorito, enquanto acessa a Api
   const [like, setLike] = useState(EmptyHeart)
   const [favorite, setFavorite] = useState(EmptyStar)
+  const [toFollow, setToFollow] = useState(Follow)
 
   const {authenticated} = useContext(Context)
   const {token} = authenticated
-  // Criando todas a funções de deletar, dar like e de favoritar
+  // Criando todas a funções de deletar, dar like, favoritar e seguir
   const deletePiu = async() => {
     try {
       const deleteResponse = await Api.delete('/pius',
@@ -48,7 +51,17 @@ const Piu = ({user, text, likes, id, updated_at}:IPiu) => {
     } catch (error) {
       console.log(error)
     }
-  } 
+  }
+  
+  const follow = async({id}:IUser) => {
+    try {
+      const followResponse = await Api.post('/pius/follow', {data:{followed_id:id}},
+    { headers: {authorization:`Bearer ${token}`}})
+      console.log(followResponse)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return(
     <S.PiuBox>
@@ -63,6 +76,12 @@ const Piu = ({user, text, likes, id, updated_at}:IPiu) => {
           onClick={()=>{
             setFavorite(GoldenStar)
             favoritePiu()
+           }} 
+          alt="Star" />
+        <S.Icons src={toFollow} 
+          onClick={()=>{
+            setToFollow(Following)
+            follow(user)
           }} 
           alt="Star" />
       </S.PiuBoxProfile>
@@ -85,7 +104,7 @@ const Piu = ({user, text, likes, id, updated_at}:IPiu) => {
 
         <S.Icons src={DeleteIcon} 
           onClick={() => {
-            deletePiu()
+          deletePiu()
           }} 
           alt="Star" />
       </S.PiuInterections>
